@@ -27,25 +27,16 @@
 		const result = [];
 		let leftCount = count;
 
-		function getBanknote(banknote) {
-			let counter = 0;
-			minusMoney(leftCount, banknote, counter);
-		}
-
-		function minusMoney(count, banknote, counter) {
-			if(banknote <= leftCount) {
-				leftCount = count - banknote;
-				counter++;
-				minusMoney(leftCount, banknote, counter);
-			} else {
-				if(counter!=0) {
-					result.push(counter+': ' + banknote);
-				}
-			}
-		}
-
 		ATM.forEach(banknote => {
-			getBanknote(banknote);
+			let counter = 0;
+			// minusMoney(leftCount, banknote, counter);
+			while (banknote <= leftCount) {
+				leftCount = leftCount - banknote;
+				counter++;
+			}
+			if (counter != 0) {
+				result.push(counter + ': ' + banknote);
+			}
 		});
 
 		return result;
