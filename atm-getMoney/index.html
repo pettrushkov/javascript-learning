@@ -27,9 +27,8 @@
 		const result = [];
 		let leftCount = count;
 
-		ATM.forEach(banknote => {
+		sortNominals.forEach(banknote => {
 			let counter = 0;
-			// minusMoney(leftCount, banknote, counter);
 			while (banknote <= leftCount) {
 				leftCount = leftCount - banknote;
 				counter++;
