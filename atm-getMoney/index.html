@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>ATM - Get Money</title>
+</head>
+<body>
+<p>Есть банкомат с определенным набором купюр и количество денег, которые нужно снять. Нужно вывести строку (или просто
+	обьект) с количеством купюр и их номиналом</p>
+<code>
+	var ATM = [200, 5, 50, 10, 20, 2];
+	console.log(getMoney(2135)); // {10:200; 2:50; 1:20; 1:10; 1:5}
+</code>
+
+<script>
+	let ATM = [200, 5, 50, 10, 20, 2];
+	console.log(getMoney(2135));
+
+	function getMoney(count) {
+		let sortNominals = ATM.sort(function (a, b) {
+			return b - a;
+		});
+
+		const result = [];
+		let leftCount = count;
+
+		function getBanknote(banknote) {
+			let counter = 0;
+			minusMoney(leftCount, banknote, counter);
+		}
+
+		function minusMoney(count, banknote, counter) {
+			if(banknote <= leftCount) {
+				leftCount = count - banknote;
+				counter++;
+				minusMoney(leftCount, banknote, counter);
+			} else {
+				if(counter!=0) {
+					result.push(counter+':' + banknote);
+				}
+			}
+		}
+
+		ATM.forEach(banknote => {
+			getBanknote(banknote);
+		});
+
+		return result;
+	}
+
+</script>
+
+</body>
+</html>
